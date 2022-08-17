@@ -1,0 +1,17 @@
+.letter-grid {
+  display: grid;
+  width: 100%;
+  height: 450px;
+  grid-template-rows: repeat(5, 1fr);
+  row-gap: 10px;
+}
+
+.letter-grid-row {
+  display: flex;
+  width: 25%;
+  /* width: 100%; (mobile) */
+  height: 100%;
+  margin: 0 auto;
+  column-gap: 10px;
+  align-items: center;
+}
