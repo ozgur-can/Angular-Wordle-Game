@@ -6,6 +6,8 @@ import { KeyboardComponent } from '../wordle/keyboard/keyboard.component';
 import { LetterGridComponent } from '../wordle/letter-grid/letter-grid.component';
 import { LetterComponent } from '../wordle/letter/letter.component';
 import { WordleRootComponent } from '../wordle/wordle-root/wordle-root.component';
+import { StoreModule } from '@ngrx/store';
+import { wordleGridReducer } from './store/reducers';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,7 @@ import { WordleRootComponent } from '../wordle/wordle-root/wordle-root.component
     WordleRootComponent,
     LetterComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, StoreModule.forRoot({ wordle: wordleGridReducer })],
   exports: [
     FormsModule,
     HeaderComponent,

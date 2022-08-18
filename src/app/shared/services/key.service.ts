@@ -16,7 +16,7 @@ export class KeyService {
   
   listen() {
     this.keyUpEvent!.subscribe((key: string) => {
-      console.log(key);
+      console.log('pressed => ', key);
     });
   }
 }
