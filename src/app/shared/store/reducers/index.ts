@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { setLetter } from '../actions';
 
-export const wordleGridState = ['ÖZGÜR', '', '', '', ''];
+export const wordleGridState = ['', '', '', '', ''];
 
 export interface IState {
   wordle: string[];

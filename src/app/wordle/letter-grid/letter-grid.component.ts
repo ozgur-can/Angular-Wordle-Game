@@ -20,9 +20,12 @@ export class LetterGridComponent implements OnInit {
     this.wordle$ = this.store.pipe(select('wordle'));
     // set letters;
     this.wordle$.subscribe((data) => {
-      this.wordleLetters = data;
+      this.wordleLetters = [...data];
     });
 
-    this.keyService.listen();
+    // # 1 add letter to grid (basic)
+    this.keyService.listen()!.subscribe((key) => {
+      this.wordleLetters[0] = this.wordleLetters[0].concat(key.toUpperCase())
+    });
   }
 }
