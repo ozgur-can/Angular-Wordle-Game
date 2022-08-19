@@ -9,6 +9,7 @@ import { WordleRootComponent } from '../wordle/wordle-root/wordle-root.component
 import { StoreModule } from '@ngrx/store';
 import { wordleGridReducer } from './store/reducers';
 import { HideEmptyLetterPipe } from './pipes/hide.pipe';
+import { KeyComponent } from '../wordle/key/key.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HideEmptyLetterPipe } from './pipes/hide.pipe';
     WordleRootComponent,
     LetterComponent,
     HideEmptyLetterPipe,
+    KeyComponent
   ],
   imports: [CommonModule, StoreModule.forRoot({ game: wordleGridReducer })],
   exports: [

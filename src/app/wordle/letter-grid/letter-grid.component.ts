@@ -15,7 +15,6 @@ import { IPointer, IState } from 'src/app/shared/store/interfaces';
   styleUrls: ['./letter-grid.component.scss'],
 })
 export class LetterGridComponent implements OnInit {
-  countTest$?: Observable<number> = undefined;
   state$?: Observable<IState> = undefined;
   wordleLetters: string[] = [];
   pointer?: IPointer = undefined;
@@ -53,7 +52,8 @@ export class LetterGridComponent implements OnInit {
       else if (isEnter) {
         this.store.dispatch(movePointer(this.pointer!.row + 1, 0));
       }
-      // backspace pressed (TODO: fix)
+      // TODO: fix
+      // backspace pressed
       else if (isBackspace) {
         this.store.dispatch(removeLetter());
         this.store.dispatch(
