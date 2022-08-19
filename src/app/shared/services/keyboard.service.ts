@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class KeyService {
+export class KeyboardService {
   private keyUpEvent?: Observable<string> = undefined;
 
   constructor() {
