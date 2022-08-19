@@ -1,0 +1,1 @@
+body,html{margin:0;padding:0;height:100%}*{box-sizing:border-box}.w-100{width:100%}@font-face{font-family:DynaPuff;src:url(DynaPuff-Regular.56fde79e6a4cd9651e99.ttf)}@mixin flex($direction, $x, $y){display:flex;flex-direction:$direction;align-items:$x;justify-content:$y;height:100%}
