@@ -6,15 +6,32 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class KeyboardService {
-  private keyUpEvent?: Observable<string> = undefined;
+  private keyUpEvent?: Observable<string | undefined> = undefined;
 
   constructor() {
     this.keyUpEvent = fromEvent<KeyboardEvent>(document, 'keyup').pipe(
-      map((event: KeyboardEvent) => event.key)
+      map((event: KeyboardEvent) => this.filterKeys(event))
     );
   }
 
   listen() {
     return this.keyUpEvent;
+  }
+
+  // only between a - z
+  filterKeys(event: KeyboardEvent) {
+    if (
+      (event.keyCode >= 65 && event.keyCode <= 90) ||
+      (event.keyCode >= 188 && event.keyCode <= 221) ||
+      event.key === 'Enter'
+    ) {
+      return event.key;
+    }
+
+    return;
+  }
+
+  isEnterPressed(key: string) {
+    return key === 'Enter';
   }
 }

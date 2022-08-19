@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { KeyboardService } from 'src/app/shared/services/keyboard.service';
+import { movePointer } from 'src/app/shared/store/actions';
 import { IPointer, IState } from 'src/app/shared/store/interfaces';
 
 @Component({
@@ -22,17 +23,25 @@ export class LetterGridComponent implements OnInit {
 
   ngOnInit(): void {
     this.state$ = this.store.select('game');
+    // get letters;
     this.state$.subscribe((state) => {
-      // get letters;
       this.wordleLetters = [...state.wordle];
       this.pointer = state.pointer;
     });
 
-    // # 1 add letter to grid (basic)
+    // keyboardservice for key listening & setting values to wordle grid
     this.keyboardService.listen()!.subscribe((key) => {
-      this.wordleLetters[this.pointer!.row] = this.wordleLetters[
-        this.pointer!.row
-      ].concat(key.toUpperCase());
+      if (!key) return;
+
+      // set letter
+      if (!this.keyboardService.isEnterPressed(key!)) {
+        this.wordleLetters[this.pointer!.row] = this.wordleLetters[
+          this.pointer!.row
+        ].concat(key!.toUpperCase());
+      } else {
+        // change row
+        this.store.dispatch(movePointer(this.pointer!.row + 1, 0));
+      }
     });
   }
 }
