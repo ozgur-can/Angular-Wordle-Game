@@ -23,7 +23,7 @@ export class KeyboardService {
     if (
       (event.keyCode >= 65 && event.keyCode <= 90) ||
       (event.keyCode >= 188 && event.keyCode <= 221) ||
-      event.key === 'Enter'
+      event.key === 'Enter' || event.key === 'Backspace'
     ) {
       return event.key;
     }
@@ -33,5 +33,9 @@ export class KeyboardService {
 
   isEnterPressed(key: string) {
     return key === 'Enter';
+  }
+
+  isBackspacePressed(key: string) {
+    return key === 'Backspace';
   }
 }

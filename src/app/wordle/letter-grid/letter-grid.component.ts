@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { KeyboardService } from 'src/app/shared/services/keyboard.service';
-import { movePointer } from 'src/app/shared/store/actions';
+import {
+  movePointer,
+  removeLetter,
+  setLetter,
+} from 'src/app/shared/store/actions';
 import { IPointer, IState } from 'src/app/shared/store/interfaces';
 
 @Component({
@@ -33,14 +37,28 @@ export class LetterGridComponent implements OnInit {
     this.keyboardService.listen()!.subscribe((key) => {
       if (!key) return;
 
+      const isEnter = this.keyboardService.isEnterPressed(key!);
+      const isBackspace = this.keyboardService.isBackspacePressed(key!);
+
       // set letter
-      if (!this.keyboardService.isEnterPressed(key!)) {
-        this.wordleLetters[this.pointer!.row] = this.wordleLetters[
-          this.pointer!.row
-        ].concat(key!.toUpperCase());
-      } else {
-        // change row
+      if (!isEnter && !isBackspace) {
+        this.store.dispatch(
+          setLetter(this.pointer!.row, this.pointer!.col, key)
+        );
+        this.store.dispatch(
+          movePointer(this.pointer!.row, this.pointer!.col + 1)
+        );
+      }
+      // enter pressed -> change row
+      else if (isEnter) {
         this.store.dispatch(movePointer(this.pointer!.row + 1, 0));
+      }
+      // backspace pressed (TODO: fix)
+      else if (isBackspace) {
+        this.store.dispatch(removeLetter());
+        this.store.dispatch(
+          movePointer(this.pointer!.row, this.pointer!.col - 1)
+        );
       }
     });
   }
