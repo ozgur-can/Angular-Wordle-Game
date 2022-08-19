@@ -17,7 +17,7 @@ import { wordleGridReducer } from './store/reducers';
     WordleRootComponent,
     LetterComponent,
   ],
-  imports: [CommonModule, StoreModule.forRoot({ wordle: wordleGridReducer })],
+  imports: [CommonModule, StoreModule.forRoot({ game: wordleGridReducer })],
   exports: [
     FormsModule,
     HeaderComponent,

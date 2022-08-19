@@ -1,14 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
 import { setLetter } from '../actions';
+import { IState } from '../interfaces';
 
-export const wordleGridState = ['', '', '', '', ''];
+export const wordleGrid = ['', '', '', '', ''];
+const pointer = { row: 0, col: 0 };
 
-export interface IState {
-  wordle: string[];
-}
-
-export const wordleGridReducer = createReducer(
-  wordleGridState,
+export const wordleGridReducer = createReducer<IState>(
+  {
+    wordle: wordleGrid,
+    pointer,
+  },
   on(setLetter, (state, { row, col }) => {
     return state;
   })
